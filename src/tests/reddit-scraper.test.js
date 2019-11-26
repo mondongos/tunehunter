@@ -17,4 +17,21 @@ describe('Reddit Scraper', () => {
             ]
         )
     })
+
+    describe('Fetching page data', () => {
+
+        test('Fetches page successfully', async () => {
+            let pageData = await scraper.fetchPage('https://www.reddit.com/r/listentous/top/?sort=top&t=month')
+            expect(pageData.status).toEqual(200)
+        })
+    })
+
+    describe('Gather data on page', () => {
+
+        test('Find links on page', () => {
+            let pageData = scraper.fetchPage('https://www.reddit.com/r/listentous/top/?sort=top&t=month')
+            let linksArr = scraper.findLinks(pageData)
+            expect(linksArr.length).toBeGreaterThan(1)
+        })
+    })
 })
